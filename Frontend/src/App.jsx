@@ -35,7 +35,6 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <header>
-          <h1>Real-time Polling App</h1>
           {selectedRole && (
             <button onClick={handleBackToRoleSelection}>
               Back to Role Selection

@@ -9,7 +9,6 @@ const StudentView = () => {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    // Check if name exists in sessionStorage
     const savedName = sessionStorage.getItem('studentName');
     if (savedName) {
       setStudentName(savedName);
@@ -23,7 +22,6 @@ const StudentView = () => {
   };
 
   const handleNameSubmit = (name) => {
-    // Save name to sessionStorage (unique to tab, persistent on refresh)
     sessionStorage.setItem('studentName', name);
     setStudentName(name);
     connectAsStudent(name);
@@ -34,15 +32,25 @@ const StudentView = () => {
   }
 
   return (
-    <div>
-      <div>
-        <h2>Student View</h2>
-        <p>Welcome, {studentName}!</p>
-        {isConnected && <p>Connected to server</p>}
+    <div className="min-h-screen bg-white px-6 py-10">
+      <div className="max-w-3xl mx-auto space-y-8">
+        {/* Header */}
+        <div className="text-center">
+          <span className="inline-block mb-3 px-4 py-1 bg-indigo-100 text-indigo-600 text-sm font-semibold rounded-full">
+            ✦ Intervue Poll
+          </span>
+          <h2 className="text-3xl font-bold text-gray-800">Welcome, {studentName}!</h2>
+          {isConnected && (
+            <p className="text-sm text-green-600 mt-1">✓ Connected to server</p>
+          )}
+        </div>
+
+        {/* Poll Question Component */}
+        <PollQuestion />
+
+        {/* Poll Results Component */}
+        <PollResults />
       </div>
-      
-      <PollQuestion />
-      <PollResults />
     </div>
   );
 };
